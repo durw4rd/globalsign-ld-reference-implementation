@@ -8,7 +8,7 @@ terraform {
   }
 
 
-  required_version = "~> 1.1.6"
+  # required_version = "~> 1.1.6"
 }
 
 # Configure the LaunchDarkly provider
@@ -42,28 +42,28 @@ variable "launchdarkly_access_token" {
 #   }
 # }
 
-/* Example: Create roles for projects matching a prefix */
-module "sandbox-prefix-project-roles" {
-  source = "./roles/flag-lifecycle"
-  project = {
-    key  = "sandbox-*"
-    name = "Sandbox projects"
-  }
-  // `role_key` is appended to generated role keys
-  // we need to set it since `sandbox-*` is not a valid role key
-  // example roles: flag-manager-sandbox, archiver-sandbox, etc
-  role_key = "sandbox"
-  environments = {
-    "test" = {
-      key = "test"
-      name = "Test"
-    },
-    "production" = {
-      key = "production"
-      name = "Production"
-    }
-  }
-}
+# /* Example: Create roles for projects matching a prefix */
+# module "sandbox-prefix-project-roles" {
+#   source = "./roles/flag-lifecycle"
+#   project = {
+#     key  = "sandbox-*"
+#     name = "Sandbox projects"
+#   }
+#   // `role_key` is appended to generated role keys
+#   // we need to set it since `sandbox-*` is not a valid role key
+#   // example roles: flag-manager-sandbox, archiver-sandbox, etc
+#   role_key = "sandbox"
+#   environments = {
+#     "test" = {
+#       key = "test"
+#       name = "Test"
+#     },
+#     "production" = {
+#       key = "production"
+#       name = "Production"
+#     }
+#   }
+# }
 
 /* Example: Create roles for preproduction/production using wildcards and denies */
 module "preproduction-production-roles" {
@@ -92,7 +92,7 @@ module "preproduction-production-roles" {
   }
   // map of environments keys (as defined above) to environment kets 
   environment_excludes = {
-    "preproduction" = [ "production" ]
+    "preproduction" = [ "staging", "production" ]
   }
 }
 
