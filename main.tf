@@ -23,24 +23,24 @@ variable "launchdarkly_access_token" {
 }
 
 
-/* Example: Create per-project roles using the project-roles module */
-module "default-project-roles" {
-  source = "./roles/flag-lifecycle"
-  project = {
-    key  = "default"
-    name = "Default project"
-  }
-  environments = {
-    "test" = {
-      key = "test"
-      name = "Test"
-    },
-    "production" = {
-      key = "production"
-      name = "Production"
-    }
-  }
-}
+# /* Example: Create per-project roles using the project-roles module */
+# module "default-project-roles" {
+#   source = "./roles/flag-lifecycle"
+#   project = {
+#     key  = "default"
+#     name = "Default project"
+#   }
+#   environments = {
+#     "test" = {
+#       key = "test"
+#       name = "Test"
+#     },
+#     "production" = {
+#       key = "production"
+#       name = "Production"
+#     }
+#   }
+# }
 
 /* Example: Create roles for projects matching a prefix */
 module "sandbox-prefix-project-roles" {
@@ -69,8 +69,8 @@ module "sandbox-prefix-project-roles" {
 module "preproduction-production-roles" {
   source = "./roles/flag-lifecycle"
   project = {
-    key  = "default"
-    name = "Default project"
+    key  = "atlas"
+    name = "Atlas"
   }
 
   environments = {
@@ -80,6 +80,10 @@ module "preproduction-production-roles" {
       // the key defines the specifier
       key = "*"
       name = "Preproduction"
+    },
+    "staging" = {
+      key = "staging"
+      name = "Staging"
     },
     "production" = {
       key = "production"
